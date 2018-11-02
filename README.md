@@ -1,0 +1,1 @@
+# How-to-autofits-the-content-based-on-the-property-chnage-in-xamarin.forms-listview-using-MVVM
