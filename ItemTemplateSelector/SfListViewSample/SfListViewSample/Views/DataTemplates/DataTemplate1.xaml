@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                xmlns:local="clr-namespace:SfListViewSample"
+             x:Class="SfListViewSample.DataTemplate1">
+    <ViewCell.BindingContext>
+        <local:BookInfoViewModel x:Name="viewModel"/>
+    </ViewCell.BindingContext>
+    <ViewCell.View>
+        <Grid x:Name="grid" RowSpacing="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Grid RowSpacing="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Image Source="{Binding AuthorImage}"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Center"
+                                                   HeightRequest="50"/>
+
+                </Grid>
+
+                <StackLayout Grid.Column="1" Padding="5,-5,0,0">
+                    <Label LineBreakMode="WordWrap"
+                                               FontAttributes="Bold"
+                                                   TextColor="#474747"
+                                                   Text="{Binding BookName}">
+                    </Label>
+                    <Label TextColor="#474747"                                               
+                                               LineBreakMode="WordWrap"                                                   
+                                               Text="{Binding BookDescription}">
+                    </Label>
+                </StackLayout>
+                <Button Grid.Column="2" x:Name="showLess" Text="Show Less" Command="{Binding TapItem, Source={x:Reference viewModel}}" CommandParameter="{x:Reference showLess}" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Grid>
+            <BoxView Grid.Row="1" HeightRequest="1" Opacity="0.75" BackgroundColor="#CECECE" />
+        </Grid>
+    </ViewCell.View>
+</ViewCell>

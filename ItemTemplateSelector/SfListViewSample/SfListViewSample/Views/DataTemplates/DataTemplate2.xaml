@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:local="clr-namespace:SfListViewSample"
+             x:Class="SfListViewSample.DataTemplate2">
+    <ViewCell.BindingContext>
+        <local:BookInfoViewModel x:Name="viewModel"/>
+    </ViewCell.BindingContext>
+    <ViewCell.View>
+        <Grid x:Name="grid" RowSpacing="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <StackLayout Padding="5,-5,0,0" Orientation="Horizontal">
+                <Label TextColor="#474747"                                               
+                                               LineBreakMode="WordWrap"                                                   
+                                               Text="{Binding BookName}">
+                </Label>
+                <Button HorizontalOptions="EndAndExpand" x:Name="showmore" Text="Show More" Command="{Binding TapItem, Source={x:Reference viewModel}}" CommandParameter="{x:Reference showmore}"/>
+            </StackLayout>
+            <BoxView Grid.Row="1" HeightRequest="1" Opacity="0.75" BackgroundColor="#CECECE" />
+        </Grid>
+    </ViewCell.View>
+</ViewCell>
