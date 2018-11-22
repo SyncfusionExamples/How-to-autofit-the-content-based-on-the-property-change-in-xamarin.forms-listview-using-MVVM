@@ -14,7 +14,7 @@ namespace SfListViewSample
             base.OnAttachedTo(bindable);
             listView = bindable as SfListView;
             listView.ItemAppearing += OnItemAppearing;
-            listView.ItemDisappearing += ListView_ItemDisappearing;
+            listView.ItemDisappearing += OnItemDisappearing;
         }
         private void OnItemAppearing(object sender, ItemAppearingEventArgs e)
         {
@@ -22,11 +22,14 @@ namespace SfListViewSample
         }
         private void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            var itemIndex = listView.DataSource.DisplayItems.IndexOf(sender);
-            if (Device.RuntimePlatform != Device.macOS)
-                Device.BeginInvokeOnMainThread(() => { listView.RefreshListViewItem(itemIndex, itemIndex, false); });
+            if (e.PropertyName == "IsSelected")
+            {
+                var itemIndex = listView.DataSource.DisplayItems.IndexOf(sender);
+                if (Device.RuntimePlatform != Device.macOS)
+                    Device.BeginInvokeOnMainThread(() => { listView.RefreshListViewItem(itemIndex, itemIndex, false); });
+            }
         }
-        private void ListView_ItemDisappearing(object sender, ItemDisappearingEventArgs e)
+        private void OnItemDisappearing(object sender, ItemDisappearingEventArgs e)
         {
             (e.ItemData as BookInfo).PropertyChanged -= OnPropertyChanged;
         }
@@ -35,6 +38,7 @@ namespace SfListViewSample
         {
             base.OnDetachingFrom(bindable);
             listView.ItemAppearing -= OnItemAppearing;
+            listView.ItemDisappearing -= OnItemDisappearing;
         }
     }
 }
